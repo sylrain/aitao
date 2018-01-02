@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aitao.dao.OrderDealMapper">
+
+
+    <resultMap id="TbOrderDeal" type="com.aitao.domain.po.OrderDeal">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="uid" property="uid" jdbcType="INTEGER"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="return_channel" property="returnChannel" jdbcType="VARCHAR"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="deal_time" property="dealTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="fieldSql">
+        t.id
+        , t.uid
+        , t.state
+        , t.return_channel
+        , t.add_time
+        , t.deal_time
+    </sql>
+
+    <sql id="whereSql">
+        <if test="id != null and id != ''">
+            AND t.id = #{id,jdbcType = INTEGER}
+        </if>
+        <if test="uid != null">
+            AND t.uid = #{uid,jdbcType = INTEGER}
+        </if>
+        <if test="state != null">
+            AND t.state = #{state,jdbcType = INTEGER}
+        </if>
+    </sql>
+
+    <select id="select" parameterType="INTEGER" resultMap="TbOrderDeal" >
+        SELECT
+        <include refid="fieldSql"/>
+        FROM tb_order_deal t
+        WHERE t.id = #{id,jdbcType = INTEGER}
+    </select>
+
+    <select id="count" parameterType="com.aitao.domain.condition.OrderDealCondition" resultType="Integer" >
+        SELECT
+        count(1)
+        FROM tb_order_deal t
+        WHERE 1=1
+        <include refid="whereSql"/>
+    </select>
+
+    <select id="selectList" parameterType="com.aitao.domain.condition.OrderDealCondition" resultMap="TbOrderDeal" >
+        SELECT
+        <include refid="fieldSql"/>
+        FROM tb_order_deal t
+        WHERE 1=1
+        <include refid="whereSql"/>
+    </select>
+
+    <insert id="insert" parameterType="com.aitao.domain.po.OrderDeal">
+        INSERT INTO tb_order_deal(
+        id
+        <if test="uid != null">
+            ,uid
+        </if>
+        <if test="state != null">
+            ,state
+        </if>
+        <if test="returnChannel != null and returnChannel != ''">
+            ,return_channel
+        </if>
+        <if test="addTime != null">
+            ,add_time
+        </if>
+        <if test="dealTime != null">
+            ,deal_time
+        </if>
+        )
+        values(
+        #{id,jdbcType=INTEGER}
+        <if test="uid != null">
+            ,#{uid,jdbcType=INTEGER}
+        </if>
+        <if test="state != null">
+            ,#{state,jdbcType=INTEGER}
+        </if>
+        <if test="returnChannel != null and returnChannel != ''">
+            ,#{returnChannel,jdbcType=VARCHAR}
+        </if>
+        <if test="addTime != null">
+            ,#{addTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="dealTime != null">
+            ,#{dealTime,jdbcType=TIMESTAMP}
+        </if>
+        )
+    </insert>
+
+    <update id="update" parameterType="com.aitao.domain.po.OrderDeal">
+        UPDATE tb_order_deal t
+        <set>
+            <if test="state != null">
+                t.state = #{state,jdbcType = INTEGER},
+            </if>
+            <if test="returnChannel != null">
+                t.return_channel = #{returnChannel,jdbcType = VARCHAR},
+            </if>
+            <if test="addTime != null">
+                t.add_time = #{addTime,jdbcType = TIMESTAMP},
+            </if>
+            <if test="dealTime != null">
+                t.deal_time = #{dealTime,jdbcType = TIMESTAMP},
+            </if>
+        </set>
+        WHERE
+        t.id= #{id,jdbcType = INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="INTEGER">
+        DELETE FROM tb_order_deal
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    
+    <select id="queryInfoList" parameterType="com.aitao.domain.condition.OrderDealCondition" resultType="com.aitao.domain.po.OrderInfo">
+        SELECT
+        t.id
+        , t.uid
+        , t.state
+        , t.return_channel as returnChannel
+        , o.ordername
+        , o.orderid
+        , o.orderdate
+        , o.paymoney
+        , o.incomemoney
+        , o.incomepercent
+        , o.ratemoney
+        , o.ratepercent
+        FROM tb_order_deal t JOIN alimamaorder o ON t.id = o.id
+        WHERE 1=1
+        <include refid="whereSql"/>
+    </select>
+</mapper>

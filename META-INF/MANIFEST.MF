@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Class-Path: spring-jdbc-4.3.10.RELEASE.jar spring-plugin-metadata-1.2.
+ 0.RELEASE.jar aspectjrt-1.8.10.jar spring-data-commons-1.13.6.RELEASE
+ .jar spring-aop-4.3.10.RELEASE.jar spring-tx-4.3.10.RELEASE.jar jsqlp
+ arser-0.9.5.jar springfox-spring-web-2.2.2.jar log4j-over-slf4j-1.7.2
+ 5.jar spring-boot-starter-logging-1.5.6.RELEASE.jar spring-web-4.3.10
+ .RELEASE.jar spring-expression-4.3.10.RELEASE.jar springfox-swagger2-
+ 2.2.2.jar springfox-core-2.2.2.jar springfox-swagger-common-2.2.2.jar
+  mapstruct-1.0.0.CR1.jar spring-core-4.3.10.RELEASE.jar spring-plugin
+ -core-1.2.0.RELEASE.jar mybatis-spring-boot-starter-1.2.0.jar swagger
+ -annotations-1.5.3.jar slf4j-api-1.7.25.jar jcl-over-slf4j-1.7.25.jar
+  logback-classic-1.1.11.jar pagehelper-spring-boot-autoconfigure-1.1.
+ 0.jar tomcat-embed-websocket-8.5.16.jar jackson-databind-2.8.9.jar as
+ pectjweaver-1.8.10.jar spring-boot-starter-web-1.5.6.RELEASE.jar jbos
+ s-logging-3.3.1.Final.jar swagger-models-1.5.3.jar snakeyaml-1.17.jar
+  pagehelper-spring-boot-starter-1.1.0.jar tomcat-embed-core-8.5.16.ja
+ r hibernate-validator-5.3.5.Final.jar spring-hateoas-0.23.0.RELEASE.j
+ ar springfox-swagger-ui-2.2.2.jar jackson-mapper-asl-1.9.13.jar jacks
+ on-core-asl-1.9.13.jar guava-18.0.jar tomcat-juli-8.5.16.jar tomcat-e
+ mbed-el-8.5.16.jar pagehelper-5.0.0.jar mybatis-spring-boot-autoconfi
+ gure-1.2.0.jar tomcat-jdbc-8.5.16.jar android-json-0.0.20131108.vaadi
+ n1.jar mybatis-spring-1.3.1.jar spring-boot-starter-jdbc-1.5.6.RELEAS
+ E.jar jackson-core-2.8.9.jar validation-api-1.1.0.Final.jar classmate
+ -1.3.3.jar spring-boot-starter-tomcat-1.5.6.RELEASE.jar springfox-sch
+ ema-2.2.2.jar spring-boot-1.5.6.RELEASE.jar mybatis-3.4.2.jar spring-
+ beans-4.3.10.RELEASE.jar spring-boot-starter-1.5.6.RELEASE.jar mysql-
+ connector-java-5.1.43.jar springfox-spi-2.2.2.jar spring-webmvc-4.3.1
+ 0.RELEASE.jar logback-core-1.1.11.jar spring-boot-configuration-proce
+ ssor-1.5.6.RELEASE.jar jul-to-slf4j-1.7.25.jar jackson-annotations-2.
+ 8.0.jar spring-context-4.3.10.RELEASE.jar spring-boot-autoconfigure-1
+ .5.6.RELEASE.jar
+Main-Class: com.aitao.AiTaoApplication
+

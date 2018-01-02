@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aitao.dao.UserMapper">
+
+    <resultMap id="User" type="com.aitao.domain.po.User">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="ali" property="ali" jdbcType="VARCHAR"/>
+        <result column="wechat" property="wechat" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="token" property="token" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="fieldSql">
+        t.id
+        , t.name
+        , t.password
+        , t.ali
+        , t.wechat
+        , t.state
+        , t.add_time
+        , t.token
+    </sql>
+
+    <sql id="whereSql">
+        <if test="id != null">
+            AND t.id = #{id,jdbcType = INTEGER}
+        </if>
+        <if test="name != null and name != ''">
+            AND t.name = #{name,jdbcType = VARCHAR}
+        </if>
+        <if test="ali != null and ali != ''">
+            AND t.ali = #{ali,jdbcType = VARCHAR}
+        </if>
+        <if test="wechat != null and wechat != ''">
+            AND t.wechat = #{wechat,jdbcType = VARCHAR}
+        </if>
+        <if test="token != null and token != ''">
+            AND t.token = #{token,jdbcType = VARCHAR}
+        </if>
+    </sql>
+
+    <select id="select" parameterType="Integer" resultMap="User" >
+        SELECT
+        <include refid="fieldSql"/>
+        FROM tb_user t
+        WHERE t.id = #{id,jdbcType = INTEGER}
+    </select>
+
+    <select id="count" parameterType="com.aitao.domain.condition.UserCondition" resultType="Integer" >
+        SELECT
+        count(1)
+        FROM tb_user t
+        WHERE 1=1
+        <include refid="whereSql"/>
+    </select>
+
+    <select id="selectList" parameterType="com.aitao.domain.condition.UserCondition" resultMap="User" >
+        SELECT
+        <include refid="fieldSql"/>
+        FROM tb_user t
+        WHERE 1=1
+        <include refid="whereSql"/>
+    </select>
+
+    <insert id="insert" parameterType="com.aitao.domain.po.User">
+        <selectKey keyProperty="id" resultType="Integer" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO tb_user(
+        id
+        <if test="name != null and name != ''">
+            ,name
+        </if>
+        <if test="password != null and password != ''">
+            ,password
+        </if>
+        <if test="ali != null and ali != ''">
+            ,ali
+        </if>
+        <if test="wechat != null and wechat != ''">
+            ,wechat
+        </if>
+        <if test="state != null">
+            ,state
+        </if>
+        <if test="addTime != null">
+            ,add_time
+        </if>
+        <if test="token != null and token != ''">
+            ,token
+        </if>
+        )
+        values(
+        #{id,jdbcType=INTEGER}
+        <if test="name != null and name != ''">
+            ,#{name,jdbcType=VARCHAR}
+        </if>
+        <if test="password != null and password != ''">
+            ,#{password,jdbcType=VARCHAR}
+        </if>
+        <if test="ali != null and ali != ''">
+            ,#{ali,jdbcType=VARCHAR}
+        </if>
+        <if test="wechat != null and wechat != ''">
+            ,#{wechat,jdbcType=VARCHAR}
+        </if>
+        <if test="state != null">
+            ,#{state,jdbcType=INTEGER}
+        </if>
+        <if test="addTime != null">
+            ,#{addTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="token != null and token != ''">
+            ,#{token,jdbcType=VARCHAR}
+        </if>
+        )
+    </insert>
+
+    <update id="update" parameterType="com.aitao.domain.po.User">
+        UPDATE tb_user t
+        <set>
+            <if test="name != null">
+                t.name = #{name,jdbcType = VARCHAR},
+            </if>
+            <if test="password != null">
+                t.password = #{password,jdbcType = VARCHAR},
+            </if>
+            <if test="ali != null">
+                t.ali = #{ali,jdbcType = VARCHAR},
+            </if>
+            <if test="wechat != null">
+                t.wechat = #{wechat,jdbcType = VARCHAR},
+            </if>
+            <if test="state != null">
+                t.state = #{state,jdbcType = INTEGER},
+            </if>
+            <if test="addTime != null">
+                t.add_time = #{addTime,jdbcType = TIMESTAMP},
+            </if>
+            <if test="token != null">
+                t.token = #{token,jdbcType = VARCHAR},
+            </if>
+        </set>
+        WHERE
+        t.id= #{id,jdbcType = INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        DELETE FROM tb_user
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="queryByNickName" parameterType="String" resultMap="User">
+        SELECT
+        <include refid="fieldSql"/>
+        FROM tb_user t
+        WHERE t.name = #{name,jdbcType = VARCHAR}
+    </select>
+
+    <select id="queryByAli" parameterType="String" resultMap="User">
+        SELECT
+        <include refid="fieldSql"/>
+        FROM tb_user t
+        WHERE t.ali = #{ali,jdbcType = VARCHAR}
+    </select>
+
+    <select id="queryByWechat" parameterType="String" resultMap="User">
+        SELECT
+        <include refid="fieldSql"/>
+        FROM tb_user t
+        WHERE t.wechat = #{wechat,jdbcType = VARCHAR}
+    </select>
+
+
+    <insert id="batchInsert" parameterType="List" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT tb_user(name,password)
+        VALUES
+        <foreach collection="list" separator="," item="item">
+            (#{item.name},#{item.password})
+        </foreach>
+    </insert>
+</mapper>

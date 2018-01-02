@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aitao.dao.OrderMapper">
+
+
+    <resultMap id="Alimamaorder" type="com.aitao.domain.po.Order">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="ordername" property="ordername" jdbcType="VARCHAR"/>
+        <result column="orderid" property="orderid" jdbcType="VARCHAR"/>
+        <result column="orderdate" property="orderdate" jdbcType="VARCHAR"/>
+        <result column="paymoney" property="paymoney" jdbcType="VARCHAR"/>
+        <result column="incomemoney" property="incomemoney" jdbcType="VARCHAR"/>
+        <result column="incomepercent" property="incomepercent" jdbcType="VARCHAR"/>
+        <result column="ratemoney" property="ratemoney" jdbcType="VARCHAR"/>
+        <result column="ratepercent" property="ratepercent" jdbcType="VARCHAR"/>
+        <result column="orderstate" property="orderstate" jdbcType="VARCHAR"/>
+        <result column="hasrate" property="hasrate" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="fieldSql">
+        t.id
+        , t.ordername
+        , t.orderid
+        , t.orderdate
+        , t.paymoney
+        , t.incomemoney
+        , t.incomepercent
+        , t.ratemoney
+        , t.ratepercent
+        , t.orderstate
+        , t.hasrate
+    </sql>
+
+    <sql id="whereSql">
+        <if test="id != null">
+            AND t.id = #{id,jdbcType = INTEGER}
+        </if>
+        <if test="ordername != null and ordername != ''">
+            AND t.ordername = #{ordername,jdbcType = VARCHAR}
+        </if>
+        <if test="orderid != null and orderid != ''">
+            AND t.orderid = #{orderid,jdbcType = VARCHAR}
+        </if>
+        <if test="orderdate != null and orderdate != ''">
+            AND t.orderdate = #{orderdate,jdbcType = VARCHAR}
+        </if>
+        <if test="paymoney != null and paymoney != ''">
+            AND t.paymoney = #{paymoney,jdbcType = VARCHAR}
+        </if>
+        <if test="incomemoney != null and incomemoney != ''">
+            AND t.incomemoney = #{incomemoney,jdbcType = VARCHAR}
+        </if>
+        <if test="incomepercent != null and incomepercent != ''">
+            AND t.incomepercent = #{incomepercent,jdbcType = VARCHAR}
+        </if>
+        <if test="ratemoney != null and ratemoney != ''">
+            AND t.ratemoney = #{ratemoney,jdbcType = VARCHAR}
+        </if>
+        <if test="ratepercent != null and ratepercent != ''">
+            AND t.ratepercent = #{ratepercent,jdbcType = VARCHAR}
+        </if>
+        <if test="orderstate != null and orderstate != ''">
+            AND t.orderstate = #{orderstate,jdbcType = VARCHAR}
+        </if>
+        <if test="hasrate != null and hasrate != ''">
+            AND t.hasrate = #{hasrate,jdbcType = VARCHAR}
+        </if>
+    </sql>
+
+    <select id="select" parameterType="String" resultMap="Alimamaorder" >
+        SELECT
+        <include refid="fieldSql"/>
+        FROM alimamaorder t
+        WHERE t.id = #{id,jdbcType = INTEGER}
+    </select>
+
+    <select id="count" parameterType="com.aitao.domain.condition.OrderCondition" resultType="Integer" >
+        SELECT
+        count(1)
+        FROM alimamaorder t
+        WHERE 1=1
+        <include refid="whereSql"/>
+    </select>
+
+    <select id="selectList" parameterType="com.aitao.domain.condition.OrderCondition" resultMap="Alimamaorder" >
+        SELECT
+        <include refid="fieldSql"/>
+        FROM alimamaorder t
+        WHERE 1=1
+        <include refid="whereSql"/>
+    </select>
+
+    <insert id="insert" parameterType="com.aitao.domain.po.Order">
+        INSERT INTO alimamaorder(
+        id
+        <if test="ordername != null and ordername != ''">
+            ,ordername
+        </if>
+        <if test="orderid != null and orderid != ''">
+            ,orderid
+        </if>
+        <if test="orderdate != null and orderdate != ''">
+            ,orderdate
+        </if>
+        <if test="paymoney != null and paymoney != ''">
+            ,paymoney
+        </if>
+        <if test="incomemoney != null and incomemoney != ''">
+            ,incomemoney
+        </if>
+        <if test="incomepercent != null and incomepercent != ''">
+            ,incomepercent
+        </if>
+        <if test="ratemoney != null and ratemoney != ''">
+            ,ratemoney
+        </if>
+        <if test="ratepercent != null and ratepercent != ''">
+            ,ratepercent
+        </if>
+        <if test="orderstate != null and orderstate != ''">
+            ,orderstate
+        </if>
+        <if test="hasrate != null and hasrate != ''">
+            ,hasrate
+        </if>
+        )
+        values(
+        #{id,jdbcType=INTEGER}
+        <if test="ordername != null and ordername != ''">
+            ,#{ordername,jdbcType=VARCHAR}
+        </if>
+        <if test="orderid != null and orderid != ''">
+            ,#{orderid,jdbcType=VARCHAR}
+        </if>
+        <if test="orderdate != null and orderdate != ''">
+            ,#{orderdate,jdbcType=VARCHAR}
+        </if>
+        <if test="paymoney != null and paymoney != ''">
+            ,#{paymoney,jdbcType=VARCHAR}
+        </if>
+        <if test="incomemoney != null and incomemoney != ''">
+            ,#{incomemoney,jdbcType=VARCHAR}
+        </if>
+        <if test="incomepercent != null and incomepercent != ''">
+            ,#{incomepercent,jdbcType=VARCHAR}
+        </if>
+        <if test="ratemoney != null and ratemoney != ''">
+            ,#{ratemoney,jdbcType=VARCHAR}
+        </if>
+        <if test="ratepercent != null and ratepercent != ''">
+            ,#{ratepercent,jdbcType=VARCHAR}
+        </if>
+        <if test="orderstate != null and orderstate != ''">
+            ,#{orderstate,jdbcType=VARCHAR}
+        </if>
+        <if test="hasrate != null and hasrate != ''">
+            ,#{hasrate,jdbcType=VARCHAR}
+        </if>
+        )
+    </insert>
+
+    <update id="update" parameterType="com.aitao.domain.po.Order">
+        UPDATE alimamaorder t
+        <set>
+            <if test="ordername != null">
+                t.ordername = #{ordername,jdbcType = VARCHAR},
+            </if>
+            <if test="orderdate != null">
+                t.orderdate = #{orderdate,jdbcType = VARCHAR},
+            </if>
+            <if test="paymoney != null">
+                t.paymoney = #{paymoney,jdbcType = VARCHAR},
+            </if>
+            <if test="incomemoney != null">
+                t.incomemoney = #{incomemoney,jdbcType = VARCHAR},
+            </if>
+            <if test="incomepercent != null">
+                t.incomepercent = #{incomepercent,jdbcType = VARCHAR},
+            </if>
+            <if test="ratemoney != null">
+                t.ratemoney = #{ratemoney,jdbcType = VARCHAR},
+            </if>
+            <if test="ratepercent != null">
+                t.ratepercent = #{ratepercent,jdbcType = VARCHAR},
+            </if>
+            <if test="orderstate != null">
+                t.orderstate = #{orderstate,jdbcType = VARCHAR},
+            </if>
+            <if test="hasrate != null">
+                t.hasrate = #{hasrate,jdbcType = VARCHAR},
+            </if>
+        </set>
+        WHERE
+        t.id= #{id,jdbcType = INTEGER} and t.orderid= #{orderid,jdbcType = VARCHAR}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        DELETE FROM alimamaorder
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="queryByOrderId" parameterType="String" resultMap="Alimamaorder">
+        SELECT
+        <include refid="fieldSql"/>
+        FROM alimamaorder t
+        WHERE t.orderid= #{orderid,jdbcType = VARCHAR}
+    </select>
+</mapper>
